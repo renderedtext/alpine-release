@@ -9,13 +9,13 @@ defmodule Mix.Tasks.Alpine.Release do
 
     execute "rm -rf rel"
     execute "(docker stop builder && docker rm builder) || true"
-    execute "docker run --name builder -e MIX_ENV=prod -w /release -tdi renderedtext/elixir-thrift-dev"
+    execute "docker run --name builder -e MIX_ENV=prod -w /release -di renderedtext/elixir-thrift-dev"
     execute "docker cp . builder:/release"
-    execute "docker exec -ti builder sh -c 'apk add erlang-edoc'"
-    execute "docker exec -ti builder sh -c 'apk add erlang-snmp'"
-    execute "docker exec -ti builder sh -c 'mix deps.get'"
-    execute "docker exec -ti builder sh -c 'mix compile'"
-    execute "docker exec -ti builder sh -c 'mix release'"
+    execute "docker exec -i builder sh -c 'apk add erlang-edoc'"
+    execute "docker exec -i builder sh -c 'apk add erlang-snmp'"
+    execute "docker exec -i builder sh -c 'mix deps.get'"
+    execute "docker exec -i builder sh -c 'mix compile'"
+    execute "docker exec -i builder sh -c 'mix release'"
     execute "mkdir rel"
     execute "docker cp builder:/release/rel/#{app_name}/releases/#{version}/#{app_name}.tar.gz rel/app.tar.gz"
 
@@ -24,9 +24,19 @@ defmodule Mix.Tasks.Alpine.Release do
   end
 
   def execute(command) do
-    IO.puts " ---> #{command}"
+    IO.puts "---> #{command}"
 
-    command |> String.to_char_list |> :os.cmd |> to_string
+    {result, exit_status} = System.cmd("sh", ["-c", command])
+
+    IO.puts result
+
+    if exit_status != 0 do
+      IO.puts ""
+      IO.puts "\e[31mError while running command.\e\[0m"
+      System.halt(1)
+    end
+
+    result
   end
 
 end
