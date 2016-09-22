@@ -26,9 +26,7 @@ defmodule Mix.Tasks.Alpine.Release do
   def execute(command) do
     IO.puts "---> #{command}"
 
-    {result, exit_status} = System.cmd("sh", ["-c", command])
-
-    IO.puts result
+    {result, exit_status} = System.cmd("sh", ["-c", command], into: IO.stream(:stdio, :line))
 
     if exit_status != 0 do
       IO.puts ""
