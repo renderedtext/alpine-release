@@ -8,7 +8,10 @@ Add alpine_release to your list of dependencies in `mix.exs`:
 
 ``` elixir
 def deps do
-  [{:alpine_release, github: "renderedtext/alpine-release"}}]
+  [
+    {:exrm, "~> 1.0"},
+    {:alpine_release, github: "renderedtext/alpine-release"}
+  ]
 end
 ```
 
