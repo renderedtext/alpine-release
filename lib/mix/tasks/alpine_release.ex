@@ -17,7 +17,7 @@ defmodule Mix.Tasks.Alpine.Release do
     execute "docker exec -ti builder sh -c 'mix compile'"
     execute "docker exec -ti builder sh -c 'mix release'"
     execute "mkdir rel"
-    execute "docker cp builder:/release/rel/#{app_name}/releases/#{version}/insights.tar.gz rel/app.tar.gz"
+    execute "docker cp builder:/release/rel/#{app_name}/releases/#{version}/#{app_name}.tar.gz rel/app.tar.gz"
 
     IO.puts ""
     IO.puts "Done. Your release can can be found in 'rel/app.tar.gz'"
