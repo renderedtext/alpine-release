@@ -1,20 +1,22 @@
-# AlpineRelease
+# Alpine Release
 
-**TODO: Add description**
+Generate an exrm release for Alpine Docker with ease.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+Add alpine_release to your list of dependencies in `mix.exs`:
 
-  1. Add alpine_release to your list of dependencies in `mix.exs`:
+``` elixir
+def deps do
+  [{:alpine_release, "~> 0.0.1"}]
+end
+```
 
-        def deps do
-          [{:alpine_release, "~> 0.0.1"}]
-        end
+## Generate an release
 
-  2. Ensure alpine_release is started before your application:
+``` bash
+mix alpine.release
+```
 
-        def application do
-          [applications: [:alpine_release]]
-        end
-
+When it finishes, your release can be found in `rel/app.tar.gz` and ready to be
+injected in any Alpine Based docker image.
