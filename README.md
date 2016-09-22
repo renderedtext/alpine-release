@@ -12,7 +12,7 @@ def deps do
 end
 ```
 
-## Generate an release
+## Generate a release
 
 ``` bash
 mix alpine.release
