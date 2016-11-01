@@ -9,7 +9,7 @@ defmodule Mix.Tasks.Alpine.Release do
 
     execute "rm -rf rel"
     execute "(docker stop builder && docker rm builder) || true"
-    execute "docker run --name builder -e MIX_ENV=prod -w /release -di renderedtext/elixir-thrift-dev"
+    execute "docker run --name builder -e MIX_ENV=#{System.get_env("MIX_ENV") || "prod"} -w /release -di renderedtext/elixir-thrift-dev"
     execute "docker cp . builder:/release"
     execute "docker exec -i builder sh -c 'apk add erlang-edoc'"
     execute "docker exec -i builder sh -c 'apk add erlang-snmp'"
