@@ -23,3 +23,9 @@ mix alpine.release
 
 When it finishes, your release can be found in `rel/app.tar.gz` and ready to be
 injected in any Alpine Based docker image.
+
+You can also specify the environment in which you what the release to be made, for example:
+
+```bash
+MIX_ENV=test mix alpine.release
+```
