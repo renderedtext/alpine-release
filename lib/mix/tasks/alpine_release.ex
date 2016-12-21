@@ -7,7 +7,7 @@ defmodule Mix.Tasks.Alpine.Release do
     IO.puts "Generating Distillery based Alpine release for #{app_name}:#{version}"
     IO.puts ""
 
-    execute "rm rel/app.tar.gz"
+    execute "rm -f rel/app.tar.gz"
     execute "(docker stop builder && docker rm builder) || true"
     execute "docker run --name builder -e MIX_ENV=#{System.get_env("MIX_ENV") || "prod"} -w /release -di renderedtext/elixir-thrift-dev"
     execute "docker cp . builder:/release"
