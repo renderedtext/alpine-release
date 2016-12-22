@@ -1,6 +1,6 @@
 # Alpine Release
 
-Generate an exrm release for Alpine Docker with ease.
+Generate an distillery release for Alpine Docker with ease.
 
 ## Installation
 
@@ -9,7 +9,7 @@ Add alpine_release to your list of dependencies in `mix.exs`:
 ``` elixir
 def deps do
   [
-    {:exrm, "~> 1.0"},
+    {:distillery, "~> 1.0"},
     {:alpine_release, github: "renderedtext/alpine-release"}
   ]
 end
