@@ -37,11 +37,11 @@ in your Dockerfiles.
 
 This will work:
 ```bash
-`REPLACE_OS_VARS=true`
+REPLACE_OS_VARS=true
 ```
 but this won't:
 ```bash
-`RELX_REPLACE_OS_VARS=true`
+RELX_REPLACE_OS_VARS=true
 ```
 
 For more info, check out [distillery github repo](https://github.com/bitwalker/distillery).
