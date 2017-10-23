@@ -16,7 +16,7 @@ defmodule Mix.Tasks.Alpine.Release do
     execute "docker exec -i builder sh -c 'mix deps.get'"
     execute "docker exec -i builder sh -c 'mix compile'"
     execute "docker exec -i builder sh -c 'mix release'"
-    execute "docker cp builder:/release/_build/prod/rel/#{app_name}/releases/#{version}/#{app_name}.tar.gz rel/app.tar.gz"
+    execute "docker cp builder:/release/_build/#{System.get_env("MIX_ENV") || "prod"}/rel/#{app_name}/releases/#{version}/#{app_name}.tar.gz rel/app.tar.gz"
 
     IO.puts ""
     IO.puts "Done. Your release can can be found in 'rel/app.tar.gz'"
