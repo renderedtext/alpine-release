@@ -11,7 +11,7 @@ defmodule Mix.Tasks.Alpine.Release do
     execute "(docker stop builder && docker rm builder) || true"
     execute "docker run --name builder -e MIX_ENV=#{System.get_env("MIX_ENV") || "prod"} -w /release -di elixir:1.4"
     execute "docker cp . builder:/release"
-    execute "docker exec -i builder sh -c 'curl https://gist.githubusercontent.com/ervinb/c874f7ec2a174e81485c/raw/install_riffed.sh | bash'"
+    execute "docker exec -i builder sh -c 'curl https://gist.githubusercontent.com/shiroyasha/c6880588d57c109ffc2fbb52c4bad663/raw/3073b359066d87198cb668e81fa504612f258c93/alpine-install-thrift | sh'"
     execute "docker exec -i builder sh -c 'mix local.hex --force'"
     execute "docker exec -i builder sh -c 'mix local.rebar --force'"
     execute "docker exec -i builder sh -c 'mix deps.get'"
